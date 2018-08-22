@@ -1,4 +1,4 @@
-FROM centos:7
+FROM openshift/origin
 
 # Labels consumed by Red Hat build service
 LABEL com.redhat.component="ansible-oc-container" \
