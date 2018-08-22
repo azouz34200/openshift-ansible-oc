@@ -26,8 +26,11 @@ ADD contrib/bin/* /usr/local/bin/
 ENV USER_UID=1001 \
     HOME=/opt/app-root/ \
     WORK_DIR=/opt/app-root/
+
 RUN mkdir -p /opt/app-root/ && \
-     chown -R 1001:0 ${HOME}
+     chown -R 1001:0 ${HOME} && \
+    chmod -R g+w ${HOME} && \
+    chmod 664 /etc/passwd 
 USER ${USER_UID}
 #WORKDIR ${WORK_DIR}
 # Run the Jenkins JNLP client
