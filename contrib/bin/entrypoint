@@ -1,0 +1,4 @@
+#!/bin/bash
+#
+
+source /usr/local/bin/generate_container_user
