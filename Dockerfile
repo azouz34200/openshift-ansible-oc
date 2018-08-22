@@ -27,6 +27,6 @@ ENV USER_UID=1001 \
     HOME=/opt/app-root/ \
     WORK_DIR=/opt/app-root/
 USER ${USER_UID}
-WORKDIR ${WORK_DIR}
+#WORKDIR ${WORK_DIR}
 # Run the Jenkins JNLP client
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
