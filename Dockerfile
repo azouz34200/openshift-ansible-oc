@@ -12,19 +12,21 @@ LABEL com.redhat.component="ansible-oc-container" \
 USER root
 RUN yum-config-manager --disable epel >/dev/null
 RUN yum install -y epel-release 
-RUN INSTALL_PKGS="PyYAML python-jinja2 python-httplib2 python-keyczar python-paramiko python-setuptools git python2-pip ansible" && \
+RUN INSTALL_PKGS="PyYAML python-jinja2 python-httplib2 python-keyczar python-paramiko python-setuptools git python2-pip" && \
     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
     yum clean all
 
 
-#RUN mkdir /etc/ansible/
+RUN mkdir /etc/ansible/
 RUN echo -e '[local]\nlocalhost' > /etc/ansible/hosts
-#RUN pip install ansible==2.6.3
+RUN pip install ansible==2.6.3
 # Copy the entrypoint
 ADD contrib/bin/* /usr/local/bin/
 
-ENV USER_UID=1001
+ENV USER_UID=1001 \
+    HOME=/opt/app-root/ \
+    WORK_DIR=/opt/app-root/
 USER ${USER_UID}
-
+WORKDIR ${WORK_DIR}
 # Run the Jenkins JNLP client
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
